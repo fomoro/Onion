@@ -7,18 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\Service\Customers\Commands\" />
-    <Folder Include="CQRS\Service\Customers\Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\domain\Miles.Booking.Domain\Miles.Booking.Domain.csproj" />
+    <ProjectReference Include="..\..\interfaces\Miles.Booking.Repository\Miles.Booking.Repository.csproj" />
   </ItemGroup>
 
 </Project>

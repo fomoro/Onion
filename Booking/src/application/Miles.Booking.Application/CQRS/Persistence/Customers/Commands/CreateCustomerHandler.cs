@@ -1,28 +1,31 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Miles.Booking.Domain.CQRS.Customers.Commands;
 using Miles.Booking.Domain.Entities;
-using Miles.Booking.Domain.Interfaces;
+using Miles.Booking.Repository;
 
 namespace Miles.Booking.Application.CQRS.Persistence.Customers.Commands
 {
     public class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, int>
     {
-        //private readonly ILogger<CreateCustomerHandler> _logger = null;
-        private readonly IRepositoryAsync<Customer> _repositoryAsync;
+        private readonly ILogger<CreateCustomerHandler> _logger;
+        private readonly IRepositoryAsync<Customer> _context;
         private readonly IMapper _mapper;
 
-        public CreateCustomerHandler(IRepositoryAsync<Customer> repositoryAsync, IMapper mapper)
+        public CreateCustomerHandler(IRepositoryAsync<Customer> context, IMapper mapper, ILogger<CreateCustomerHandler> logger)
         {
-            _repositoryAsync = repositoryAsync;
+            _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<int> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             var newRegister = _mapper.Map<Customer>(request);
-            var data = await _repositoryAsync.AddAsync(newRegister);
-            return data.Id; 
+            await _context.AddAsync(newRegister);
+            await _context.SaveChangesAsync(cancellationToken);
+            return newRegister.Id; 
             //throw new NotImplementedException();
         }
     }

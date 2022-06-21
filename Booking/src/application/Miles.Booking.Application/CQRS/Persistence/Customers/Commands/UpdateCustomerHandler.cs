@@ -1,44 +1,43 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Miles.Booking.Domain.CQRS.Customers.Commands;
 using Miles.Booking.Domain.Entities;
-using Miles.Booking.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Miles.Booking.Repository;
 
 namespace Miles.Booking.Application.CQRS.Persistence.Customers.Commands
 {
     public class UpdateCustomerHandler : IRequestHandler<UpdateCustomerCommand, int>
     {
-        //private readonly ILogger<CreateCustomerHandler> _logger = null;
-        private readonly IRepositoryAsync<Customer> _repositoryAsync;
+        private readonly ILogger<CreateCustomerHandler> _logger;
+        private readonly IRepositoryAsync<Customer> _context;
         private readonly IMapper _mapper;
 
-        public UpdateCustomerHandler(IRepositoryAsync<Customer> repositoryAsync, IMapper mapper)
+        public UpdateCustomerHandler(IRepositoryAsync<Customer> context, IMapper mapper, ILogger<CreateCustomerHandler> logger)
         {
-            _repositoryAsync = repositoryAsync;
+            _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<int> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
-            var record = await _repositoryAsync.GetByIdAsync(request.Id);
+            var record = await _context.GetByIdAsync(request.Id);
             if (record == null)
             {
                 throw new NotImplementedException();
             }
             else
             {
-                record.Nombre = request.Nombre;
+                /*record.Nombre = request.Nombre;
                 record.Apellido = request.Apellido;
                 record.Telefono = request.Telefono;
                 record.Email = request.Email;
                 record.Direccion = request.Direccion;
-                request.FechaNacimiento = request.FechaNacimiento;
-                await _repositoryAsync.UpdateAsync(record);
+                request.FechaNacimiento = request.FechaNacimiento;*/
+                //await _repositoryAsync.UpdateAsync(record);
+                var item = _mapper.Map<Customer>(request);
+                await _context.UpdateAsync(item);
                 return record.Id;
             }
         }

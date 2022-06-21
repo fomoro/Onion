@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Miles.Booking.Domain.Interfaces
+namespace Miles.Booking.Repository
 {
-    public interface IRepositoryAsync<T>: IRepositoryBase<T> where T : class
+    public interface IRepositoryAsync<T> : IRepositoryBase<T> where T : class
     {
     }
 }

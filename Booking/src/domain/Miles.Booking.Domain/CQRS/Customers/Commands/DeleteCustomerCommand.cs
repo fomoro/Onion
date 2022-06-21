@@ -7,8 +7,5 @@ using System.Threading.Tasks;
 
 namespace Miles.Booking.Domain.CQRS.Customers.Commands
 {
-    public class DeleteCustomerCommand : IRequest<int>
-    {
-        public int Id { get; set; }
-    }
+    public record DeleteCustomerCommand(int Id) : IRequest;
 }

@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Miles.Booking.Domain.Entities
 {
+    [Table("Customers")]
     public class Customer
     {
-        public virtual int Id { get; set; }
+        [Key]
+        public int Id { get; set; }
         public string CreateBy { get; set; }
         public DateTime Created { get; set; }
         public string LastModifiedBy { get; set; }

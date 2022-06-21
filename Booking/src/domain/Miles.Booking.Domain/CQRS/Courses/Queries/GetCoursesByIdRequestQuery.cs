@@ -6,10 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Miles.Booking.Domain.CQRS.Customers.Queries
+namespace Miles.Booking.Domain.CQRS.Courses.Queries
 {
-    public class GetCustomerByIdQuery : IRequest<CustomerDto>
-    {
-        public int Id { get; set; }
-    }
+    public record GetCoursesByIdRequestQuery(int Id) : IRequest<CourseDto>;
 }

@@ -16,10 +16,12 @@ namespace Miles.Booking.Application.Mapping
         {
             #region DTOs
             CreateMap<Customer, CustomerDto>();
+            CreateMap<Course, CourseDto>();
             #endregion
 
             #region Commands
             CreateMap<CreateCustomerCommand, Customer>();
+            CreateMap<Customer, UpdateCustomerCommand>().ReverseMap();
             #endregion
         }
     }

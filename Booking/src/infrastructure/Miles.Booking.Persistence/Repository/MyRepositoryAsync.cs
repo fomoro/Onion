@@ -1,6 +1,6 @@
 ﻿using Ardalis.Specification.EntityFrameworkCore;
-using Miles.Booking.Domain.Interfaces;
 using Miles.Booking.Persistence.Context;
+using Miles.Booking.Repository;
 
 namespace Miles.Booking.Persistence.Repository
 {

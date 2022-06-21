@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 
 namespace Miles.Booking.Domain.CQRS.Customers.Queries
 {
-    public record GetAllCustomersQuery : IRequest<CustomerDto>;
+    public record GetCustomerByIdRequestQuery(int Id) : IRequest<CustomerDto>;
 }
